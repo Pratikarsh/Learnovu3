@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learnovu – Learn Smart. Crack Faster.</title>
+
+  <!-- Google Fonts: Poppins & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8faff;
+    }
+
+    h1, h2, h3, h4, h5, .font-poppins {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.05);
+    }
+
+    .glass-dark {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563EB, #38BDF8);
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-outline {
+      border: 2px solid #2563EB;
+      color: #2563EB;
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline:hover {
+      background: #2563EB;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .floating-icon {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .hero-bg {
+      background: radial-gradient(circle at 10% 30%, rgba(56, 189, 248, 0.15), transparent 60%),
+                  radial-gradient(circle at 90% 70%, rgba(37, 99, 235, 0.12), transparent 60%);
+    }
+
+    .stat-card {
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: scale(1.02);
+    }
+
+    .course-card {
+      transition: all 0.3s ease;
+      background: white;
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .course-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -12px rgba(37, 99, 235, 0.15);
+      border-color: rgba(37, 99, 235, 0.1);
+    }
+
+    .course-thumb {
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .course-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .course-body {
+      padding: 1.25rem 1.25rem 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-top: 0.25rem;
+      color: #0f172a;
+      line-height: 1.3;
+    }
+
+    .course-instructor {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.2rem;
+    }
+
+    .course-instructor span {
+      color: #1e293b;
+      font-weight: 500;
+    }
+
+    .course-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .course-rating .stars {
+      color: #f59e0b;
+      letter-spacing: 0.5px;
+    }
+
+    .course-rating .count {
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+
+    .course-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #f1f5f9;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    .course-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .course-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.75rem;
+    }
+
+    .course-price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #2563EB;
+    }
+
+    .course-price-old {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      text-decoration: line-through;
+      margin-left: 0.4rem;
+      font-weight: 400;
+    }
+
+    .course-discount {
+      background: #fef3c7;
+      color: #d97706;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.7rem;
+      border-radius: 9999px;
+    }
+
+    .course-actions {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .course-actions .btn-buy {
+      flex: 1;
+      text-align: center;
+      padding: 0.55rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #2563EB, #38BDF8);
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+
+    .course-actions .btn-buy:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    .course-actions .btn-demo {
+      padding: 0.55rem 1.2rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      border: 1.5px solid #dbeafe;
+      color: #2563EB;
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+
+    .course-actions .btn-demo:hover {
+      background: #eff6ff;
+      border-color: #2563EB;
+    }
+
+    .testimonial-card {
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      background: rgba(255,255,255,0.7);
+    }
+
+    .nav-link {
+      font-weight: 500;
+      color: #1e293b;
+      transition: color 0.2s;
+    }
+
+    .nav-link:hover {
+      color: #2563EB;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #2563EB, #38BDF8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .badge-pulse {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.7; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0.7; transform: scale(0.95); }
+    }
+
+    .course-grid {
+      display: grid;
+      gap: 1.75rem;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 640px) {
+      .course-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .course-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    #mobile-menu {
+      display: none;
+    }
+
+    #mobile-menu.open {
+      display: block;
+    }
+
+    /* FIXED DESKTOP COURSES DROPDOWN */
+    .courses-dropdown {
+      position: relative;
+    }
+
+    .mega-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 0;
+      min-width: 760px;
+      width: 760px;
+      padding: 1.25rem;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 1rem;
+      box-shadow: 0 24px 50px rgba(15, 23, 42, 0.12);
+      z-index: 999;
+    }
+
+    .courses-dropdown:hover .mega-menu,
+    .courses-dropdown:focus-within .mega-menu {
+      display: block;
+    }
+
+    .mega-menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .mega-item {
+      display: block;
+      padding: 0.95rem;
+      border-radius: 0.9rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      border: 1px solid transparent;
+      background: #ffffff;
+    }
+
+    .mega-item:hover {
+      background: #f8fbff;
+      border-color: #dbeafe;
+      transform: translateY(-2px);
+    }
+
+    .mega-item-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #2563EB;
+      margin-bottom: 0.3rem;
+    }
+
+    .mega-item-desc {
+      font-size: 0.8rem;
+      line-height: 1.45;
+      color: #64748b;
+    }
+
+    @media (max-width: 1023px) {
+      .mega-menu {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== NAVIGATION ========== -->
+<header class="sticky top-0 z-50 glass border-b border-white/20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <span class="text-2xl font-bold font-poppins text-[#2563EB]">Learnovu</span>
+        <span class="hidden md:inline text-xs font-medium bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">BETA</span>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center space-x-1 text-sm">
+        <div class="courses-dropdown">
+          <button class="nav-link px-3 py-2 rounded-lg flex items-center gap-1">
+            Courses
+            <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+
+          <div class="mega-menu">
+            <div class="mega-menu-grid">
+              <a href="#" class="mega-item">
+                <div class="mega-item-title">SSC</div>
+                <div class="mega-item-desc">CGL, CHSL, MTS, CPO and complete exam preparation.</div>
+              </a>
+
+              <a href="#" class="mega-item">
+                <div class="mega-item-title">Banking</div>
+                <div class="mega-item-desc">IBPS, SBI, RRB and bank exam live classes and mocks.</div>
+              </a>
+
+              <a href="#" class="mega-item">
+                <div class="mega-item-title">Railway</div>
+                <div class="mega-item-desc">NTPC, Group D, ALP and railway-focused preparation paths.</div>
+              </a>
+
+              <a href="#" class="mega-item">
+                <div class="mega-item-title">Defence</div>
+                <div class="mega-item-desc">NDA, CDS, AFCAT and defence entrance guidance.</div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        
+        <a href="index.html" class="nav-link px-3 py-2">Home</a>
+        <a href="#" class="nav-link px-3 py-2">Practice PDF</a>
+        <a href="RESONING.html" class="nav-link px-3 py-2">Reasoning</a>
+        <a href="QUANT PAGE..html" class="nav-link px-3 py-2">Quant</a>
+        <a href="#" class="nav-link px-3 py-2">Blog</a>
+        <a href="#" class="nav-link px-3 py-2">Community</a>
+        <a href="#" class="nav-link px-3 py-2">About</a>
+      </nav>
+
+      <!-- Right buttons + mobile toggle -->
+      <div class="flex items-center space-x-3">
+        <a href="#" class="hidden md:inline-block text-sm font-medium text-gray-700 hover:text-blue-600">Login</a>
+        <a href="#" class="btn-primary text-sm px-4 py-2 rounded-full font-medium">Register</a>
+        <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 text-2xl leading-none">☰</button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden bg-white/90 backdrop-blur-md border-t border-gray-200/50 py-4 px-2">
+      <div class="flex flex-col space-y-2 text-sm font-medium">
+        <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Courses</a>
+        <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Practice PDF</a>
+        <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Reasoning</a>
+        <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Quant</a>
+        <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Blog</a>
+        <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Community</a>
+        <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">About</a>
+        <hr class="my-2" />
+        <a href="#" class="px-3 py-2 text-blue-600 font-semibold">Login</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="relative overflow-hidden hero-bg pt-16 pb-24 md:pt-24 md:pb-32">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <span class="inline-block bg-blue-100 text-blue-700 text-xs font-semibold px-3 py-1 rounded-full mb-4">🚀 India's Smartest Learning Platform</span>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-poppins leading-tight text-gray-800">
+          Crack <span class="gradient-text">SSC, Banking & Railway</span> Exams with India's Smartest Learning Platform
+        </h1>
+        <p class="mt-6 text-lg text-gray-600 max-w-lg">
+          Live Classes • Mock Tests • Previous Year Papers • AI Study Planner • Daily PDFs • Doubt Solving
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="#" class="btn-primary px-8 py-3 rounded-full text-sm font-semibold shadow-lg">Start Learning Free</a>
+          <a href="#" class="btn-outline px-8 py-3 rounded-full text-sm font-semibold">Explore Courses</a>
+        </div>
+        <div class="mt-8 flex items-center space-x-6 text-sm text-gray-500">
+          <span class="flex items-center gap-1">⭐ 4.9/5</span>
+          <span class="flex items-center gap-1">👨‍🎓 2.5M+ students</span>
+          <span class="flex items-center gap-1">🏆 98% success rate</span>
+        </div>
+      </div>
+
+      <div class="relative flex justify-center">
+        <div class="relative w-full max-w-md">
+          <div class="absolute -top-8 -left-8 floating-icon text-6xl opacity-20">📚</div>
+          <div class="absolute top-10 -right-6 floating-icon text-5xl opacity-20" style="animation-delay: 1s;">🎯</div>
+          <div class="absolute bottom-10 -left-4 floating-icon text-5xl opacity-20" style="animation-delay: 2s;">🏅</div>
+
+          <div class="glass p-6 rounded-3xl shadow-2xl border border-white/50">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-blue-50 p-4 rounded-2xl text-center"><span class="text-3xl">📖</span><p class="text-xs font-medium mt-1">Live Classes</p></div>
+              <div class="bg-sky-50 p-4 rounded-2xl text-center"><span class="text-3xl">🧠</span><p class="text-xs font-medium mt-1">AI Mentor</p></div>
+              <div class="bg-indigo-50 p-4 rounded-2xl text-center"><span class="text-3xl">📝</span><p class="text-xs font-medium mt-1">Mock Tests</p></div>
+              <div class="bg-cyan-50 p-4 rounded-2xl text-center"><span class="text-3xl">🏆</span><p class="text-xs font-medium mt-1">Leaderboard</p></div>
+            </div>
+          </div>
+
+          <div class="absolute -bottom-4 -right-4 bg-white rounded-full shadow-xl px-4 py-2 flex items-center gap-2 badge-pulse border border-blue-200">
+            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+            <span class="text-xs font-semibold">2.5k+ online</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute top-1/4 right-0 w-72 h-72 bg-blue-200/20 rounded-full blur-3xl"></div>
+  <div class="absolute bottom-0 left-0 w-96 h-96 bg-sky-200/20 rounded-full blur-3xl"></div>
+</section>
+
+<!-- ========== STATISTICS ========== -->
+<section class="py-12 bg-white/50 backdrop-blur-sm border-y border-white/20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div class="stat-card p-4 rounded-2xl glass"><div class="text-3xl font-bold text-blue-600">2.5M+</div><div class="text-sm text-gray-600">Students</div></div>
+      <div class="stat-card p-4 rounded-2xl glass"><div class="text-3xl font-bold text-blue-600">15k+</div><div class="text-sm text-gray-600">Mock Tests</div></div>
+      <div class="stat-card p-4 rounded-2xl glass"><div class="text-3xl font-bold text-blue-600">98%</div><div class="text-sm text-gray-600">Success Rate</div></div>
+      <div class="stat-card p-4 rounded-2xl glass"><div class="text-3xl font-bold text-blue-600">4.9⭐</div><div class="text-sm text-gray-600">Average Rating</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COURSES ========== -->
+<section class="py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold font-poppins">Popular <span class="gradient-text">Courses</span></h2>
+      <p class="text-gray-500 mt-2">Curated for SSC, Banking, Railway & more</p>
+    </div>
+
+    <div class="course-grid">
+      <div class="course-card">
+        <div class="course-thumb bg-gradient-to-br from-blue-100 to-sky-100">
+          <span class="course-badge bg-green-100 text-green-700">Bestseller</span>
+          📘
+        </div>
+        <div class="course-body">
+          <h3 class="course-title">SSC CGL 2026</h3>
+          <p class="course-instructor">Instructor: <span>Ravi Sir</span></p>
+          <div class="course-rating">
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="count">(4.9)</span>
+          </div>
+          <div class="course-price-row">
+            <div>
+              <span class="course-price">₹2,999</span>
+              <span class="course-price-old">₹9,999</span>
+            </div>
+            <span class="course-discount">70% off</span>
+          </div>
+          <div class="course-meta">
+            <span class="course-meta-item">👨‍🎓 12.4k enrolled</span>
+            <span class="course-meta-item">⏳ 6 months</span>
+          </div>
+          <div class="course-actions">
+            <a href="#" class="btn-buy">Buy Now</a>
+            <a href="#" class="btn-demo">Watch Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb bg-gradient-to-br from-indigo-100 to-purple-100">
+          <span class="course-badge bg-orange-100 text-orange-700">Popular</span>
+          🏦
+        </div>
+        <div class="course-body">
+          <h3 class="course-title">Banking Pro (IBPS/SBI)</h3>
+          <p class="course-instructor">Instructor: <span>Anjali Mam</span></p>
+          <div class="course-rating">
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="count">(4.8)</span>
+          </div>
+          <div class="course-price-row">
+            <div>
+              <span class="course-price">₹3,499</span>
+              <span class="course-price-old">₹12,999</span>
+            </div>
+            <span class="course-discount">73% off</span>
+          </div>
+          <div class="course-meta">
+            <span class="course-meta-item">👨‍🎓 8.2k enrolled</span>
+            <span class="course-meta-item">⏳ 8 months</span>
+          </div>
+          <div class="course-actions">
+            <a href="#" class="btn-buy">Buy Now</a>
+            <a href="#" class="btn-demo">Watch Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb bg-gradient-to-br from-cyan-100 to-teal-100">
+          <span class="course-badge bg-blue-100 text-blue-700">New</span>
+          🚆
+        </div>
+        <div class="course-body">
+          <h3 class="course-title">Railway NTPC 2026</h3>
+          <p class="course-instructor">Instructor: <span>Suresh Sir</span></p>
+          <div class="course-rating">
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="count">(4.7)</span>
+          </div>
+          <div class="course-price-row">
+            <div>
+              <span class="course-price">₹2,199</span>
+              <span class="course-price-old">₹7,999</span>
+            </div>
+            <span class="course-discount">72% off</span>
+          </div>
+          <div class="course-meta">
+            <span class="course-meta-item">👨‍🎓 5.6k enrolled</span>
+            <span class="course-meta-item">⏳ 5 months</span>
+          </div>
+          <div class="course-actions">
+            <a href="#" class="btn-buy">Buy Now</a>
+            <a href="#" class="btn-demo">Watch Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb bg-gradient-to-br from-rose-100 to-pink-100">
+          <span class="course-badge bg-purple-100 text-purple-700">Defence</span>
+          🛡️
+        </div>
+        <div class="course-body">
+          <h3 class="course-title">NDA / CDS 2026</h3>
+          <p class="course-instructor">Instructor: <span>Col. Verma</span></p>
+          <div class="course-rating">
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="count">(4.8)</span>
+          </div>
+          <div class="course-price-row">
+            <div>
+              <span class="course-price">₹3,999</span>
+              <span class="course-price-old">₹14,999</span>
+            </div>
+            <span class="course-discount">73% off</span>
+          </div>
+          <div class="course-meta">
+            <span class="course-meta-item">👨‍🎓 3.1k enrolled</span>
+            <span class="course-meta-item">⏳ 7 months</span>
+          </div>
+          <div class="course-actions">
+            <a href="#" class="btn-buy">Buy Now</a>
+            <a href="#" class="btn-demo">Watch Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb bg-gradient-to-br from-amber-100 to-yellow-100">
+          <span class="course-badge bg-emerald-100 text-emerald-700">Trending</span>
+          🎓
+        </div>
+        <div class="course-body">
+          <h3 class="course-title">CUET 2026</h3>
+          <p class="course-instructor">Instructor: <span>Dr. Mehta</span></p>
+          <div class="course-rating">
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="count">(4.9)</span>
+          </div>
+          <div class="course-price-row">
+            <div>
+              <span class="course-price">₹2,499</span>
+              <span class="course-price-old">₹8,999</span>
+            </div>
+            <span class="course-discount">72% off</span>
+          </div>
+          <div class="course-meta">
+            <span class="course-meta-item">👨‍🎓 4.8k enrolled</span>
+            <span class="course-meta-item">⏳ 6 months</span>
+          </div>
+          <div class="course-actions">
+            <a href="#" class="btn-buy">Buy Now</a>
+            <a href="#" class="btn-demo">Watch Demo</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-thumb bg-gradient-to-br from-violet-100 to-fuchsia-100">
+          <span class="course-badge bg-rose-100 text-rose-700">Premium</span>
+          📊
+        </div>
+        <div class="course-body">
+          <h3 class="course-title">CAT 2026</h3>
+          <p class="course-instructor">Instructor: <span>Prof. Iyer</span></p>
+          <div class="course-rating">
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="count">(4.8)</span>
+          </div>
+          <div class="course-price-row">
+            <div>
+              <span class="course-price">₹4,499</span>
+              <span class="course-price-old">₹15,999</span>
+            </div>
+            <span class="course-discount">72% off</span>
+          </div>
+          <div class="course-meta">
+            <span class="course-meta-item">👨‍🎓 6.3k enrolled</span>
+            <span class="course-meta-item">⏳ 9 months</span>
+          </div>
+          <div class="course-actions">
+            <a href="#" class="btn-buy">Buy Now</a>
+            <a href="#" class="btn-demo">Watch Demo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section class="py-16 bg-blue-50/30">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold font-poppins">What our <span class="gradient-text">students</span> say</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="testimonial-card p-6 rounded-2xl shadow-sm">
+        <p class="text-gray-700">“Learnovu's AI study planner helped me crack SSC CGL in just 4 months. The mock tests are incredibly realistic.”</p>
+        <div class="flex items-center mt-4 gap-3">
+          <div class="w-10 h-10 rounded-full bg-blue-200 flex items-center justify-center text-blue-700 font-bold">AK</div>
+          <div>
+            <p class="font-semibold">Amit Kumar</p>
+            <p class="text-xs text-gray-400">SSC CGL 2025 Rank 12</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card p-6 rounded-2xl shadow-sm">
+        <p class="text-gray-700">“The banking course is top-notch. Live classes and doubt solving helped me score 98 percentile in SBI PO.”</p>
+        <div class="flex items-center mt-4 gap-3">
+          <div class="w-10 h-10 rounded-full bg-sky-200 flex items-center justify-center text-sky-700 font-bold">PR</div>
+          <div>
+            <p class="font-semibold">Priya Sharma</p>
+            <p class="text-xs text-gray-400">SBI PO 2025</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card p-6 rounded-2xl shadow-sm">
+        <p class="text-gray-700">“I love the daily PDFs and vocabulary builder. It made my preparation consistent and fun. Highly recommended!”</p>
+        <div class="flex items-center mt-4 gap-3">
+          <div class="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-700 font-bold">RJ</div>
+          <div>
+            <p class="font-semibold">Rahul Jain</p>
+            <p class="text-xs text-gray-400">Railway NTPC 2025</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA ========== -->
+<section class="py-16 bg-gradient-to-r from-blue-600 to-sky-500 text-white">
+  <div class="max-w-4xl mx-auto text-center px-4">
+    <h2 class="text-3xl md:text-4xl font-bold font-poppins">Start your journey to success today</h2>
+    <p class="text-lg mt-2 opacity-90">Join 2.5M+ students and crack your exam with Learnovu.</p>
+    <a href="#" class="mt-6 inline-block bg-white text-blue-600 px-8 py-3 rounded-full font-bold shadow-lg hover:shadow-xl transition">Get Started Free</a>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-gray-900 text-gray-300 py-12">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+    <div>
+      <h4 class="text-white font-bold mb-3">Learnovu</h4>
+      <p class="text-sm">Learn Smart. Crack Faster.</p>
+    </div>
+    <div>
+      <h5 class="text-white font-semibold">Exams</h5>
+      <ul class="text-sm space-y-1"><li>SSC</li><li>Banking</li><li>Railway</li><li>Defence</li></ul>
+    </div>
+    <div>
+      <h5 class="text-white font-semibold">Resources</h5>
+      <ul class="text-sm space-y-1"><li>Mock Tests</li><li>PYQs</li><li>PDFs</li><li>Blog</li></ul>
+    </div>
+    <div>
+      <h5 class="text-white font-semibold">Support</h5>
+      <ul class="text-sm space-y-1"><li>Help Center</li><li>Contact</li><li>Privacy</li><li>Terms</li></ul>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 mt-8 border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
+    © 2026 Learnovu. All rights reserved. Built with ❤️ in India.
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+
+    if (toggle && menu) {
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menu.classList.toggle('open');
+        toggle.textContent = menu.classList.contains('open') ? '✕' : '☰';
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!menu.contains(e.target) && e.target !== toggle) {
+          menu.classList.remove('open');
+          toggle.textContent = '☰';
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

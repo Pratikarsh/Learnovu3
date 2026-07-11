@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learnovu – Master Reasoning Like a Topper</title>
+
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8faff;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563EB, #38BDF8);
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid #2563EB;
+            color: #2563EB;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: #2563EB;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .floating-icon {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .hero-bg {
+            background: radial-gradient(circle at 10% 30%, rgba(56, 189, 248, 0.15), transparent 60%),
+                radial-gradient(circle at 90% 70%, rgba(37, 99, 235, 0.12), transparent 60%);
+        }
+
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Topic Card */
+        .topic-card {
+            transition: all 0.3s ease;
+            background: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px -12px rgba(37, 99, 235, 0.12);
+            border-color: rgba(37, 99, 235, 0.08);
+        }
+
+        .topic-thumb {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .topic-body {
+            padding: 0.9rem 1rem 1.1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topic-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.3;
+        }
+
+        .topic-desc {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-top: 0.15rem;
+            line-height: 1.4;
+            flex: 1;
+        }
+
+        .topic-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.7rem;
+            color: #64748b;
+        }
+
+        .topic-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .topic-badge {
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 0.15rem 0.6rem;
+            border-radius: 9999px;
+            letter-spacing: 0.2px;
+        }
+
+        /* Course Card */
+        .course-card {
+            transition: all 0.3s ease;
+            background: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .course-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px -12px rgba(37, 99, 235, 0.12);
+            border-color: rgba(37, 99, 235, 0.08);
+        }
+
+        .course-thumb {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.2rem 0.7rem;
+            border-radius: 9999px;
+            letter-spacing: 0.2px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        }
+
+        .course-body {
+            padding: 1rem 1.15rem 1.25rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.3;
+        }
+
+        .course-instructor {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .course-instructor span {
+            color: #1e293b;
+            font-weight: 500;
+        }
+
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-top: 0.3rem;
+            font-size: 0.85rem;
+        }
+
+        .course-rating .stars {
+            color: #f59e0b;
+            letter-spacing: 0.3px;
+        }
+
+        .course-rating .count {
+            color: #94a3b8;
+            font-size: 0.75rem;
+        }
+
+        .course-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.6rem;
+            padding-top: 0.6rem;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        .course-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .course-price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.6rem;
+        }
+
+        .course-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2563EB;
+        }
+
+        .course-price-old {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-decoration: line-through;
+            margin-left: 0.3rem;
+            font-weight: 400;
+        }
+
+        .course-discount {
+            background: #fef3c7;
+            color: #d97706;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.15rem 0.6rem;
+            border-radius: 9999px;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #1e293b;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #2563EB;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #2563EB, #38BDF8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .badge-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.7;
+                transform: scale(0.95);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.7;
+                transform: scale(0.95);
+            }
+        }
+
+        /* Grids */
+        .topic-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (min-width: 640px) {
+            .topic-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .topic-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .topic-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        .course-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 768px) {
+            .course-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .course-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .practice-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (min-width: 640px) {
+            .practice-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .practice-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .mock-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: 1fr;
+        }
+
+        @media (min-width: 768px) {
+            .mock-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .mock-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            display: none;
+        }
+
+        #mobile-menu.open {
+            display: block;
+        }
+
+        /* FAQ Accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .faq-answer.open {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-icon.open {
+            transform: rotate(180deg);
+        }
+
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVIGATION ========== -->
+    <header class="sticky top-0 z-50 glass border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-bold font-poppins text-[#2563EB]">Learnovu</span>
+                    <span class="hidden md:inline text-xs font-medium bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">Reasoning</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-1 text-sm">
+                    <a href="index.html" class="nav-link px-3 py-2">Home</a>
+                    <a href="#" class="nav-link px-3 py-2">Courses</a>
+                    <a href="#" class="nav-link px-3 py-2">Practice PDF</a>
+                    <a href="RESONING.html" class="nav-link px-3 py-2">Reasoning</a>
+                    <a href="QUANT PAGE..html" class="nav-link px-3 py-2">Quant</a>
+                    <a href="#" class="nav-link px-3 py-2">Blog</a>
+                    <a href="#" class="nav-link px-3 py-2">Community</a>
+                    <a href="#" class="nav-link px-3 py-2">About</a>
+                    
+                </nav>
+
+                <div class="flex items-center space-x-3">
+                    <a href="#" class="hidden md:inline-block text-sm font-medium text-gray-700 hover:text-blue-600">Login</a>
+                    <a href="#" class="btn-primary text-sm px-4 py-2 rounded-full font-medium">Register</a>
+                    <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 text-2xl leading-none">☰</button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="lg:hidden bg-white/90 backdrop-blur-md border-t border-gray-200/50 py-4 px-2">
+                <div class="flex flex-col space-y-2 text-sm font-medium">
+                     <a href="HOME PAGE.html" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Home</a>
+                    <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Courses</a>
+                    <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Practice PDF</a>
+                    <a href="RESONING.html" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Reasoning</a>
+                    <a href="QUANT PAGE..html" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Quant</a>
+                    <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Blog</a>
+                    <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Community</a>
+                    <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">About</a>
+                    <hr class="my-2" />
+                    <a href="#" class="px-3 py-2 text-blue-600 font-semibold">Login</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="relative overflow-hidden hero-bg pt-20 pb-16 md:pt-28 md:pb-24">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-10 left-10 text-4xl font-bold text-blue-200/30 floating-icon">🧩</div>
+            <div class="absolute top-20 right-20 text-4xl font-bold text-blue-200/30 floating-icon" style="animation-delay: 1s;">🔍</div>
+            <div class="absolute bottom-20 left-20 text-4xl font-bold text-blue-200/30 floating-icon" style="animation-delay: 2s;">🎯</div>
+            <div class="absolute bottom-10 right-10 text-4xl font-bold text-blue-200/30 floating-icon" style="animation-delay: 0.5s;">💡</div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl font-bold text-blue-100/20">🧠</div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                        <i class="fas fa-sparkles"></i>
+                        <span>AI-Powered Learning</span>
+                    </div>
+
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-poppins leading-tight text-gray-800">
+                        Master <span class="gradient-text">Reasoning</span> Like a Topper
+                    </h1>
+
+                    <p class="mt-6 text-lg text-gray-600 max-w-lg">
+                        Complete reasoning preparation for SSC, Banking, Railway, CAT, and other competitive exams. Master puzzles, seating arrangements, syllogism, and more.
+                    </p>
+
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <a href="#" class="btn-primary px-8 py-3 rounded-full text-sm font-semibold shadow-lg">
+                            Start Learning Free
+                        </a>
+                        <a href="#" class="btn-outline px-8 py-3 rounded-full text-sm font-semibold">
+                            Attempt Free Mock Test
+                        </a>
+                    </div>
+
+                    <div class="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="text-center">
+                            <div class="flex items-center justify-center space-x-1 text-blue-600">
+                                <i class="fas fa-play text-sm"></i>
+                                <span class="text-xl font-bold text-gray-800">400+</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-0.5">Video Lectures</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="flex items-center justify-center space-x-1 text-blue-600">
+                                <i class="fas fa-file-alt text-sm"></i>
+                                <span class="text-xl font-bold text-gray-800">8,000+</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-0.5">Practice Questions</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="flex items-center justify-center space-x-1 text-blue-600">
+                                <i class="fas fa-bullseye text-sm"></i>
+                                <span class="text-xl font-bold text-gray-800">400+</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-0.5">Mock Tests</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="flex items-center justify-center space-x-1 text-blue-600">
+                                <i class="fas fa-users text-sm"></i>
+                                <span class="text-xl font-bold text-gray-800">100,000+</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-0.5">Students</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="glass p-6 rounded-3xl shadow-2xl border border-white/50">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-gradient-to-br from-blue-100 to-blue-200 p-5 rounded-2xl text-center">
+                                    <i class="fas fa-puzzle-piece text-4xl text-blue-600"></i>
+                                    <p class="text-sm font-medium mt-2">9+ Topics</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-green-100 to-green-200 p-5 rounded-2xl text-center">
+                                    <i class="fas fa-people-arrows text-4xl text-green-600"></i>
+                                    <p class="text-sm font-medium mt-2">8+ Videos</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-purple-100 to-purple-200 p-5 rounded-2xl text-center">
+                                    <i class="fas fa-trophy text-4xl text-purple-600"></i>
+                                    <p class="text-sm font-medium mt-2">10+ Mocks</p>
+                                </div>
+                                <div class="bg-gradient-to-br from-orange-100 to-orange-200 p-5 rounded-2xl text-center">
+                                    <i class="fas fa-brain text-4xl text-orange-600"></i>
+                                    <p class="text-sm font-medium mt-2">98% Success</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-4 -right-4 bg-white rounded-full shadow-xl px-4 py-2 flex items-center gap-2 badge-pulse border border-blue-200">
+                            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                            <span class="text-sm font-semibold text-gray-700">2.5k+ online</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SEARCH SECTION ========== -->
+    <section class="py-10 bg-white/50 backdrop-blur-sm border-y border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-3">
+                    <div class="flex-1 relative">
+                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" placeholder="Search topics, puzzles, or concepts..." class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+                    <select class="px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">All Exams</option>
+                        <option value="ssc">SSC</option>
+                        <option value="banking">Banking</option>
+                        <option value="railway">Railway</option>
+                        <option value="cat">CAT</option>
+                    </select>
+                    <select class="px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Difficulty</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                    <button class="bg-gradient-to-r from-blue-600 to-sky-400 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ALL REASONING TOPICS SECTION ========== -->
+    <section class="py-16 bg-gray-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins text-gray-800">
+                    All <span class="gradient-text">Reasoning Topics</span>
+                </h2>
+                <p class="mt-2 text-gray-500">Complete coverage of all reasoning topics for competitive exams</p>
+            </div>
+
+            <div class="topic-grid">
+                <!-- CATEGORY 1: Puzzles -->
+                <div class="topic-card reveal" style="border-left: 4px solid #2563EB;">
+                    <div class="topic-thumb bg-gradient-to-br from-blue-100 to-blue-200">
+                        <i class="fas fa-puzzle-piece text-3xl text-blue-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-blue-100 text-blue-700">Puzzles</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Floor Puzzle</h3>
+                        <p class="topic-desc">Multi-storey building floor-based arrangements</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 12</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 280</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #2563EB;">
+                    <div class="topic-thumb bg-gradient-to-br from-blue-100 to-blue-200">
+                        <i class="fas fa-box text-3xl text-blue-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-blue-100 text-blue-700">Puzzles</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Box Puzzle</h3>
+                        <p class="topic-desc">Box-based arrangement and stacking puzzles</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 250</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #2563EB;">
+                    <div class="topic-thumb bg-gradient-to-br from-blue-100 to-blue-200">
+                        <i class="fas fa-calendar-alt text-3xl text-blue-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-blue-100 text-blue-700">Puzzles</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Month & Date Puzzle</h3>
+                        <p class="topic-desc">Month, date, and day-based arrangement puzzles</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 9</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 220</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #2563EB;">
+                    <div class="topic-thumb bg-gradient-to-br from-blue-100 to-blue-200">
+                        <i class="fas fa-calendar-day text-3xl text-blue-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-blue-100 text-blue-700">Puzzles</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Day-Based Puzzle</h3>
+                        <p class="topic-desc">Days of the week based arrangement puzzles</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 8</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 200</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #2563EB;">
+                    <div class="topic-thumb bg-gradient-to-br from-blue-100 to-blue-200">
+                        <i class="fas fa-clock text-3xl text-blue-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-blue-100 text-blue-700">Puzzles</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Scheduling Puzzle</h3>
+                        <p class="topic-desc">Schedule and timetable based puzzles</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 240</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #2563EB;">
+                    <div class="topic-thumb bg-gradient-to-br from-blue-100 to-blue-200">
+                        <i class="fas fa-people-arrows text-3xl text-blue-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-blue-100 text-blue-700">Puzzles</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Distribution Puzzle</h3>
+                        <p class="topic-desc">Distribution of items/people across categories</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 11</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 260</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #2563EB;">
+                    <div class="topic-thumb bg-gradient-to-br from-blue-100 to-blue-200">
+                        <i class="fas fa-code-branch text-3xl text-blue-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-blue-100 text-blue-700">Puzzles</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Variable Puzzle</h3>
+                        <p class="topic-desc">Variable-based complex arrangement puzzles</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 13</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 300</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #2563EB;">
+                    <div class="topic-thumb bg-gradient-to-br from-blue-100 to-blue-200">
+                        <i class="fas fa-balance-scale text-3xl text-blue-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-blue-100 text-blue-700">Puzzles</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Comparison Puzzle</h3>
+                        <p class="topic-desc">Comparative ranking and order puzzles</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 9</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 230</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <!-- CATEGORY 2: Seating Arrangement -->
+                <div class="topic-card reveal" style="border-left: 4px solid #8B5CF6;">
+                    <div class="topic-thumb bg-gradient-to-br from-purple-100 to-purple-200">
+                        <i class="fas fa-chair text-3xl text-purple-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-purple-100 text-purple-700">Seating</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Linear Arrangement</h3>
+                        <p class="topic-desc">Single row/line seating arrangements</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 14</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 320</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #8B5CF6;">
+                    <div class="topic-thumb bg-gradient-to-br from-purple-100 to-purple-200">
+                        <i class="fas fa-circle text-3xl text-purple-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-purple-100 text-purple-700">Seating</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Circular Arrangement</h3>
+                        <p class="topic-desc">Circular table seating arrangements</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 16</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 350</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #8B5CF6;">
+                    <div class="topic-thumb bg-gradient-to-br from-purple-100 to-purple-200">
+                        <i class="fas fa-border-all text-3xl text-purple-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-purple-100 text-purple-700">Seating</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Square Arrangement</h3>
+                        <p class="topic-desc">Square table seating arrangements</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 240</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #8B5CF6;">
+                    <div class="topic-thumb bg-gradient-to-br from-purple-100 to-purple-200">
+                        <i class="fas fa-border-style text-3xl text-purple-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-purple-100 text-purple-700">Seating</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Rectangular Arrangement</h3>
+                        <p class="topic-desc">Rectangle table seating arrangements</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 240</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #8B5CF6;">
+                    <div class="topic-thumb bg-gradient-to-br from-purple-100 to-purple-200">
+                        <i class="fas fa-play text-3xl text-purple-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-purple-100 text-purple-700">Seating</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Triangular Arrangement</h3>
+                        <p class="topic-desc">Triangular table seating arrangements</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 8</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 200</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #8B5CF6;">
+                    <div class="topic-thumb bg-gradient-to-br from-purple-100 to-purple-200">
+                        <i class="fas fa-arrows-left-right text-3xl text-purple-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-purple-100 text-purple-700">Seating</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Double Row Arrangement</h3>
+                        <p class="topic-desc">Two parallel row seating arrangements</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 12</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 280</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #8B5CF6;">
+                    <div class="topic-thumb bg-gradient-to-br from-purple-100 to-purple-200">
+                        <i class="fas fa-grip-lines text-3xl text-purple-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-purple-100 text-purple-700">Seating</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Parallel Row Arrangement</h3>
+                        <p class="topic-desc">Parallel row seating with facing directions</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 12</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 280</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <!-- CATEGORY 3: Syllogism -->
+                <div class="topic-card reveal" style="border-left: 4px solid #22C55E;">
+                    <div class="topic-thumb bg-gradient-to-br from-green-100 to-green-200">
+                        <i class="fas fa-sitemap text-3xl text-green-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-green-100 text-green-700">Syllogism</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Basic Syllogism</h3>
+                        <p class="topic-desc">Standard syllogism with definite conclusions</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 14</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 340</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #22C55E;">
+                    <div class="topic-thumb bg-gradient-to-br from-green-100 to-green-200">
+                        <i class="fas fa-arrow-right text-3xl text-green-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-green-100 text-green-700">Syllogism</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Only a Few</h3>
+                        <p class="topic-desc">"Only a few" type syllogism problems</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 250</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #22C55E;">
+                    <div class="topic-thumb bg-gradient-to-br from-green-100 to-green-200">
+                        <i class="fas fa-circle-question text-3xl text-green-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-green-100 text-green-700">Syllogism</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Possibility Cases</h3>
+                        <p class="topic-desc">Syllogism with possibility conclusions</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 12</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 290</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #22C55E;">
+                    <div class="topic-thumb bg-gradient-to-br from-green-100 to-green-200">
+                        <i class="fas fa-arrows-turn-to-dots text-3xl text-green-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-green-100 text-green-700">Syllogism</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Reverse Syllogism</h3>
+                        <p class="topic-desc">Reverse syllogism with conclusion-based statements</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 240</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <!-- CATEGORY 4: Inequality -->
+                <div class="topic-card reveal" style="border-left: 4px solid #F97316;">
+                    <div class="topic-thumb bg-gradient-to-br from-orange-100 to-orange-200">
+                        <i class="fas fa-greater-than text-3xl text-orange-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-orange-100 text-orange-700">Inequality</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Direct Inequality</h3>
+                        <p class="topic-desc">Direct mathematical inequality problems</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 12</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 300</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #F97316;">
+                    <div class="topic-thumb bg-gradient-to-br from-orange-100 to-orange-200">
+                        <i class="fas fa-code text-3xl text-orange-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-orange-100 text-orange-700">Inequality</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Coded Inequality</h3>
+                        <p class="topic-desc">Inequality with coded symbols</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 11</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 280</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <!-- CATEGORY 5: Coding-Decoding -->
+                <div class="topic-card reveal" style="border-left: 4px solid #EC4899;">
+                    <div class="topic-thumb bg-gradient-to-br from-pink-100 to-pink-200">
+                        <i class="fas fa-lock text-3xl text-pink-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-pink-100 text-pink-700">Coding</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Old Pattern</h3>
+                        <p class="topic-desc">Traditional letter/number coding patterns</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 260</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #EC4899;">
+                    <div class="topic-thumb bg-gradient-to-br from-pink-100 to-pink-200">
+                        <i class="fas fa-key text-3xl text-pink-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-pink-100 text-pink-700">Coding</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">New Pattern</h3>
+                        <p class="topic-desc">Modern and complex coding patterns</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 12</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 300</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #EC4899;">
+                    <div class="topic-thumb bg-gradient-to-br from-pink-100 to-pink-200">
+                        <i class="fas fa-language text-3xl text-pink-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-pink-100 text-pink-700">Coding</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Chinese Coding</h3>
+                        <p class="topic-desc">Chinese language based coding-decoding</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 8</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 200</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #EC4899;">
+                    <div class="topic-thumb bg-gradient-to-br from-pink-100 to-pink-200">
+                        <i class="fas fa-border-all text-3xl text-pink-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-pink-100 text-pink-700">Coding</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Matrix Coding</h3>
+                        <p class="topic-desc">Matrix-based coding-decoding problems</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 9</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 230</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <!-- CATEGORY 6: Input-Output -->
+                <div class="topic-card reveal" style="border-left: 4px solid #06B6D4;">
+                    <div class="topic-thumb bg-gradient-to-br from-cyan-100 to-cyan-200">
+                        <i class="fas fa-arrow-right-arrow-left text-3xl text-cyan-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-cyan-100 text-cyan-700">I/O</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Shifting Pattern</h3>
+                        <p class="topic-desc">Input-output with shifting operations</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 250</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #06B6D4;">
+                    <div class="topic-thumb bg-gradient-to-br from-cyan-100 to-cyan-200">
+                        <i class="fas fa-calculator text-3xl text-cyan-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-cyan-100 text-cyan-700">I/O</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Mathematical Operations</h3>
+                        <p class="topic-desc">Input-output with arithmetic operations</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 9</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 230</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #06B6D4;">
+                    <div class="topic-thumb bg-gradient-to-br from-cyan-100 to-cyan-200">
+                        <i class="fas fa-sort text-3xl text-cyan-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-cyan-100 text-cyan-700">I/O</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Word Rearrangement</h3>
+                        <p class="topic-desc">Word-based rearrangement input-output</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 250</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <!-- CATEGORY 7: Blood Relation -->
+                <div class="topic-card reveal" style="border-left: 4px solid #EF4444;">
+                    <div class="topic-thumb bg-gradient-to-br from-red-100 to-red-200">
+                        <i class="fas fa-people-group text-3xl text-red-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-red-100 text-red-700">Blood Relation</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Single Person</h3>
+                        <p class="topic-desc">Blood relation with single person reference</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 8</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 210</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #EF4444;">
+                    <div class="topic-thumb bg-gradient-to-br from-red-100 to-red-200">
+                        <i class="fas fa-tree text-3xl text-red-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-red-100 text-red-700">Blood Relation</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Family Tree</h3>
+                        <p class="topic-desc">Family tree based blood relation problems</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 12</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 290</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #EF4444;">
+                    <div class="topic-thumb bg-gradient-to-br from-red-100 to-red-200">
+                        <i class="fas fa-code text-3xl text-red-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-red-100 text-red-700">Blood Relation</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Coded Blood Relation</h3>
+                        <p class="topic-desc">Blood relation with coded symbols</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 250</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <!-- Remaining Topics -->
+                <div class="topic-card reveal" style="border-left: 4px solid #F59E0B;">
+                    <div class="topic-thumb bg-gradient-to-br from-yellow-100 to-yellow-200">
+                        <i class="fas fa-location-dot text-3xl text-yellow-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-yellow-100 text-yellow-700">Direction</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Direction & Distance</h3>
+                        <p class="topic-desc">Direction sense and distance problems</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 12</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 300</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #8B5CF6;">
+                    <div class="topic-thumb bg-gradient-to-br from-purple-100 to-purple-200">
+                        <i class="fas fa-ranking-star text-3xl text-purple-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-purple-100 text-purple-700">Ranking</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Order & Ranking</h3>
+                        <p class="topic-desc">Ranking and positional order problems</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 260</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #06B6D4;">
+                    <div class="topic-thumb bg-gradient-to-br from-cyan-100 to-cyan-200">
+                        <i class="fas fa-list-ol text-3xl text-cyan-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-cyan-100 text-cyan-700">Series</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Alphanumeric Series</h3>
+                        <p class="topic-desc">Alphanumeric series patterns</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 9</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 240</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #06B6D4;">
+                    <div class="topic-thumb bg-gradient-to-br from-cyan-100 to-cyan-200">
+                        <i class="fas fa-hashtag text-3xl text-cyan-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-cyan-100 text-cyan-700">Series</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Number Series (Reasoning)</h3>
+                        <p class="topic-desc">Number series patterns and sequences</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 260</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #06B6D4;">
+                    <div class="topic-thumb bg-gradient-to-br from-cyan-100 to-cyan-200">
+                        <i class="fas fa-font text-3xl text-cyan-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-cyan-100 text-cyan-700">Series</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Alphabet Series</h3>
+                        <p class="topic-desc">Alphabet series patterns</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 8</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 210</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #06B6D4;">
+                    <div class="topic-thumb bg-gradient-to-br from-cyan-100 to-cyan-200">
+                        <i class="fas fa-print text-3xl text-cyan-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-cyan-100 text-cyan-700">I/O</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Machine Input-Output</h3>
+                        <p class="topic-desc">Machine based input-output operations</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 250</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <!-- Logical Reasoning Topics -->
+                <div class="topic-card reveal" style="border-left: 4px solid #22C55E;">
+                    <div class="topic-thumb bg-gradient-to-br from-green-100 to-green-200">
+                        <i class="fas fa-lightbulb text-3xl text-green-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-green-100 text-green-700">Logical</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Statement & Conclusion</h3>
+                        <p class="topic-desc">Statement based conclusions</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 250</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #22C55E;">
+                    <div class="topic-thumb bg-gradient-to-br from-green-100 to-green-200">
+                        <i class="fas fa-circle-question text-3xl text-green-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-green-100 text-green-700">Logical</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Statement & Assumption</h3>
+                        <p class="topic-desc">Statement based assumptions</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 9</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 230</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #22C55E;">
+                    <div class="topic-thumb bg-gradient-to-br from-green-100 to-green-200">
+                        <i class="fas fa-comment text-3xl text-green-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-green-100 text-green-700">Logical</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Statement & Argument</h3>
+                        <p class="topic-desc">Statement based arguments</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 8</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 210</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #22C55E;">
+                    <div class="topic-thumb bg-gradient-to-br from-green-100 to-green-200">
+                        <i class="fas fa-arrow-right text-3xl text-green-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-green-100 text-green-700">Logical</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Cause & Effect</h3>
+                        <p class="topic-desc">Cause and effect relationships</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 8</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 200</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #22C55E;">
+                    <div class="topic-thumb bg-gradient-to-br from-green-100 to-green-200">
+                        <i class="fas fa-bullseye text-3xl text-green-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-green-100 text-green-700">Logical</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Course of Action</h3>
+                        <p class="topic-desc">Course of action based on statements</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 8</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 200</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #22C55E;">
+                    <div class="topic-thumb bg-gradient-to-br from-green-100 to-green-200">
+                        <i class="fas fa-brain text-3xl text-green-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-green-100 text-green-700">Logical</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Inference</h3>
+                        <p class="topic-desc">Logical inference based on statements</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 9</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 220</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #8B5CF6;">
+                    <div class="topic-thumb bg-gradient-to-br from-purple-100 to-purple-200">
+                        <i class="fas fa-database text-3xl text-purple-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-purple-100 text-purple-700">Data</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Data Sufficiency</h3>
+                        <p class="topic-desc">Data sufficiency based questions</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 250</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #F97316;">
+                    <div class="topic-thumb bg-gradient-to-br from-orange-100 to-orange-200">
+                        <i class="fas fa-scale-balanced text-3xl text-orange-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-orange-100 text-orange-700">Critical</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Critical Reasoning</h3>
+                        <p class="topic-desc">Critical reasoning based problems</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 250</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #EC4899;">
+                    <div class="topic-thumb bg-gradient-to-br from-pink-100 to-pink-200">
+                        <i class="fas fa-chart-pie text-3xl text-pink-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-pink-100 text-pink-700">Analytical</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Analytical Reasoning</h3>
+                        <p class="topic-desc">Analytical reasoning based problems</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 250</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #06B6D4;">
+                    <div class="topic-thumb bg-gradient-to-br from-cyan-100 to-cyan-200">
+                        <i class="fas fa-check-double text-3xl text-cyan-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-cyan-100 text-cyan-700">Decision</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Decision Making</h3>
+                        <p class="topic-desc">Decision making based problems</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 8</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 200</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #F59E0B;">
+                    <div class="topic-thumb bg-gradient-to-br from-yellow-100 to-yellow-200">
+                        <i class="fas fa-list text-3xl text-yellow-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-yellow-100 text-yellow-700">Misc</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Miscellaneous Reasoning</h3>
+                        <p class="topic-desc">Miscellaneous reasoning problems</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 10</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 250</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+
+                <div class="topic-card reveal" style="border-left: 4px solid #8B5CF6;">
+                    <div class="topic-thumb bg-gradient-to-br from-purple-100 to-purple-200">
+                        <i class="fas fa-link text-3xl text-purple-600"></i>
+                        <span class="absolute top-2 left-2 topic-badge bg-purple-100 text-purple-700">Connectives</span>
+                    </div>
+                    <div class="topic-body">
+                        <h3 class="topic-title">Logical Connectives</h3>
+                        <p class="topic-desc">Logical connectives and conditions</p>
+                        <div class="topic-meta">
+                            <span class="topic-meta-item"><i class="fas fa-play text-xs"></i> 6</span>
+                            <span class="topic-meta-item"><i class="fas fa-file-alt text-xs"></i> 160</span>
+                        </div>
+                        <button class="w-full mt-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">Start →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FEATURED COURSES ========== -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins text-gray-800">
+                    Featured <span class="gradient-text">Courses</span>
+                </h2>
+                <p class="mt-2 text-gray-500">Premium courses designed by top educators</p>
+            </div>
+
+            <div class="course-grid">
+                <div class="course-card">
+                    <div class="course-thumb bg-gradient-to-br from-blue-500 to-sky-400 text-white text-6xl">
+                        <span class="course-badge bg-white/90 text-gray-700">Bestseller</span>
+                        🧩
+                    </div>
+                    <div class="course-body">
+                        <h3 class="course-title">Reasoning Mastery 2026</h3>
+                        <p class="course-instructor">by <span>Ravi Kumar</span></p>
+                        <div class="course-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="count">(4.9)</span>
+                        </div>
+                        <div class="course-price-row">
+                            <div>
+                                <span class="course-price">₹2,999</span>
+                                <span class="course-price-old">₹9,999</span>
+                            </div>
+                            <span class="course-discount">70% off</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="course-meta-item"><i class="fas fa-users"></i> 12.4k</span>
+                            <span class="course-meta-item"><i class="fas fa-clock"></i> 6 mo</span>
+                        </div>
+                        <button class="w-full mt-3 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-sky-400 text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-thumb bg-gradient-to-br from-purple-500 to-pink-400 text-white text-6xl">
+                        <span class="course-badge bg-white/90 text-gray-700">Popular</span>
+                        🎯
+                    </div>
+                    <div class="course-body">
+                        <h3 class="course-title">Banking Reasoning Pro</h3>
+                        <p class="course-instructor">by <span>Anjali Sharma</span></p>
+                        <div class="course-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="count">(4.8)</span>
+                        </div>
+                        <div class="course-price-row">
+                            <div>
+                                <span class="course-price">₹3,499</span>
+                                <span class="course-price-old">₹12,999</span>
+                            </div>
+                            <span class="course-discount">73% off</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="course-meta-item"><i class="fas fa-users"></i> 8.2k</span>
+                            <span class="course-meta-item"><i class="fas fa-clock"></i> 8 mo</span>
+                        </div>
+                        <button class="w-full mt-3 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-sky-400 text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-thumb bg-gradient-to-br from-green-500 to-emerald-400 text-white text-6xl">
+                        <span class="course-badge bg-white/90 text-gray-700">New</span>
+                        🧠
+                    </div>
+                    <div class="course-body">
+                        <h3 class="course-title">SSC Reasoning Champion</h3>
+                        <p class="course-instructor">by <span>Suresh Verma</span></p>
+                        <div class="course-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="count">(4.7)</span>
+                        </div>
+                        <div class="course-price-row">
+                            <div>
+                                <span class="course-price">₹2,199</span>
+                                <span class="course-price-old">₹7,999</span>
+                            </div>
+                            <span class="course-discount">72% off</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="course-meta-item"><i class="fas fa-users"></i> 5.6k</span>
+                            <span class="course-meta-item"><i class="fas fa-clock"></i> 5 mo</span>
+                        </div>
+                        <button class="w-full mt-3 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-sky-400 text-white rounded-xl font-semibold hover:shadow-lg transition-all hover:scale-105">
+                            Buy Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRACTICE ZONE ========== -->
+    <section class="py-16 bg-gray-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins text-gray-800">
+                    Practice <span class="gradient-text">Zone</span>
+                </h2>
+                <p class="mt-2 text-gray-500">Test your reasoning skills with various practice modes</p>
+            </div>
+
+            <div class="practice-grid">
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-yellow-500 to-orange-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-bolt text-2xl"></i>
+                    </div>
+                    <p class="mt-3 font-semibold text-gray-800">Daily Quiz</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-blue-500 to-cyan-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-book-open text-2xl"></i>
+                    </div>
+                    <p class="mt-3 font-semibold text-gray-800">Chapter Quiz</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-clock text-2xl"></i>
+                    </div>
+                    <p class="mt-3 font-semibold text-gray-800">Timed Test</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-green-500 to-emerald-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-bullseye text-2xl"></i>
+                    </div>
+                    <p class="mt-3 font-semibold text-gray-800">PYQs</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-red-500 to-rose-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-file-alt text-2xl"></i>
+                    </div>
+                    <p class="mt-3 font-semibold text-gray-800">Practice</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-indigo-500 to-blue-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-trophy text-2xl"></i>
+                    </div>
+                    <p class="mt-3 font-semibold text-gray-800">Challenge</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-orange-500 to-amber-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-crown text-2xl"></i>
+                    </div>
+                    <p class="mt-3 font-semibold text-gray-800">Leaderboard</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-teal-500 to-cyan-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-rocket text-2xl"></i>
+                    </div>
+                    <p class="mt-3 font-semibold text-gray-800">Speed Test</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MOCK TESTS ========== -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins text-gray-800">
+                    Mock <span class="gradient-text">Tests</span>
+                </h2>
+                <p class="mt-2 text-gray-500">Practice with real exam simulation</p>
+            </div>
+
+            <div class="mock-grid">
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all p-6 border border-gray-100">
+                    <div class="bg-gradient-to-br from-blue-500 to-sky-400 text-white p-3 rounded-xl inline-block">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">SSC CGL</h3>
+                    <div class="mt-4 space-y-2 text-sm text-gray-600">
+                        <p>📝 100 Questions</p>
+                        <p>⏱️ 2 hrs</p>
+                        <p>📊 200 Marks</p>
+                        <p class="font-semibold text-red-500">🔴 Hard</p>
+                    </div>
+                    <button class="w-full mt-6 px-4 py-2 bg-blue-50 text-blue-600 rounded-xl font-medium hover:bg-blue-100 transition-colors">
+                        Attempt Now →
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all p-6 border border-gray-100">
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-400 text-white p-3 rounded-xl inline-block">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">SBI PO</h3>
+                    <div class="mt-4 space-y-2 text-sm text-gray-600">
+                        <p>📝 75 Questions</p>
+                        <p>⏱️ 1.5 hrs</p>
+                        <p>📊 150 Marks</p>
+                        <p class="font-semibold text-yellow-500">🟡 Medium</p>
+                    </div>
+                    <button class="w-full mt-6 px-4 py-2 bg-blue-50 text-blue-600 rounded-xl font-medium hover:bg-blue-100 transition-colors">
+                        Attempt Now →
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all p-6 border border-gray-100">
+                    <div class="bg-gradient-to-br from-green-500 to-emerald-400 text-white p-3 rounded-xl inline-block">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">Railway NTPC</h3>
+                    <div class="mt-4 space-y-2 text-sm text-gray-600">
+                        <p>📝 80 Questions</p>
+                        <p>⏱️ 1.5 hrs</p>
+                        <p>📊 160 Marks</p>
+                        <p class="font-semibold text-yellow-500">🟡 Medium</p>
+                    </div>
+                    <button class="w-full mt-6 px-4 py-2 bg-blue-50 text-blue-600 rounded-xl font-medium hover:bg-blue-100 transition-colors">
+                        Attempt Now →
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all p-6 border border-gray-100">
+                    <div class="bg-gradient-to-br from-orange-500 to-amber-400 text-white p-3 rounded-xl inline-block">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">CAT</h3>
+                    <div class="mt-4 space-y-2 text-sm text-gray-600">
+                        <p>📝 66 Questions</p>
+                        <p>⏱️ 2 hrs</p>
+                        <p>📊 198 Marks</p>
+                        <p class="font-semibold text-red-500">🔴 Hard</p>
+                    </div>
+                    <button class="w-full mt-6 px-4 py-2 bg-blue-50 text-blue-600 rounded-xl font-medium hover:bg-blue-100 transition-colors">
+                        Attempt Now →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FORMULA HUB ========== -->
+    <section class="py-16 bg-gray-50/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins text-gray-800">
+                    Reasoning <span class="gradient-text">Resources</span>
+                </h2>
+                <p class="mt-2 text-gray-500">Quick access to reasoning shortcuts and tricks</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-2xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-blue-500 to-sky-400 w-16 h-16 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-download text-2xl"></i>
+                    </div>
+                    <p class="mt-4 font-semibold text-gray-800">Download PDF</p>
+                    <p class="text-sm text-gray-500">Click to access</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-2xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-green-500 to-emerald-400 w-16 h-16 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-book-open text-2xl"></i>
+                    </div>
+                    <p class="mt-4 font-semibold text-gray-800">Quick Revision</p>
+                    <p class="text-sm text-gray-500">Click to access</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-2xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-400 w-16 h-16 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-puzzle-piece text-2xl"></i>
+                    </div>
+                    <p class="mt-4 font-semibold text-gray-800">Puzzle Tricks</p>
+                    <p class="text-sm text-gray-500">Click to access</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-2xl transition-all cursor-pointer border border-gray-100">
+                    <div class="bg-gradient-to-br from-orange-500 to-amber-400 w-16 h-16 rounded-2xl flex items-center justify-center text-white mx-auto">
+                        <i class="fas fa-bolt text-2xl"></i>
+                    </div>
+                    <p class="mt-4 font-semibold text-gray-800">Shortcuts</p>
+                    <p class="text-sm text-gray-500">Click to access</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== AI ASSISTANT ========== -->
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-sky-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center space-x-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                    <i class="fas fa-sparkles"></i>
+                    <span>AI-Powered Features</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins text-gray-800">
+                    Your AI <span class="gradient-text">Study Assistant</span>
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-white/30">
+                    <div class="bg-gradient-to-br from-blue-500 to-sky-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white">
+                        <i class="fas fa-sparkles text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">AI Study Planner</h3>
+                    <p class="text-sm text-gray-500 mt-1">Personalized study schedule</p>
+                    <button class="mt-4 text-blue-600 font-medium hover:underline">Learn More →</button>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-white/30">
+                    <div class="bg-gradient-to-br from-green-500 to-emerald-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white">
+                        <i class="fas fa-comment-dots text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">AI Doubt Solver</h3>
+                    <p class="text-sm text-gray-500 mt-1">Instant doubt resolution</p>
+                    <button class="mt-4 text-blue-600 font-medium hover:underline">Learn More →</button>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-white/30">
+                    <div class="bg-gradient-to-br from-purple-500 to-pink-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">AI Mentor Chat</h3>
+                    <p class="text-sm text-gray-500 mt-1">24/7 mentorship</p>
+                    <button class="mt-4 text-blue-600 font-medium hover:underline">Learn More →</button>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-white/30">
+                    <div class="bg-gradient-to-br from-orange-500 to-amber-400 w-14 h-14 rounded-2xl flex items-center justify-center text-white">
+                        <i class="fas fa-bullseye text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mt-4 text-gray-800">Weak Topic Detection</h3>
+                    <p class="text-sm text-gray-500 mt-1">Identify improvement areas</p>
+                    <button class="mt-4 text-blue-600 font-medium hover:underline">Learn More →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins text-gray-800">
+                    What Our <span class="gradient-text">Students</span> Say
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="testimonial-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-blue-200 flex items-center justify-center text-2xl font-bold text-gray-700">AK</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Amit Kumar</h4>
+                            <p class="text-sm text-gray-500">SSC CGL 2025 Rank 12</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-yellow-400 mt-3">
+                        ★★★★★
+                    </div>
+                    <p class="mt-3 text-gray-700">"The Reasoning course is phenomenal! I improved my puzzle solving speed by 50%."</p>
+                </div>
+
+                <div class="testimonial-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-pink-200 flex items-center justify-center text-2xl font-bold text-gray-700">PS</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Priya Sharma</h4>
+                            <p class="text-sm text-gray-500">SBI PO 2025</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-yellow-400 mt-3">
+                        ★★★★★
+                    </div>
+                    <p class="mt-3 text-gray-700">"The practice puzzles and mock tests are incredibly realistic. Helped me score 99 percentile in reasoning!"</p>
+                </div>
+
+                <div class="testimonial-card p-6 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-full bg-green-200 flex items-center justify-center text-2xl font-bold text-gray-700">RJ</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Rahul Jain</h4>
+                            <p class="text-sm text-gray-500">Railway NTPC 2025</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-yellow-400 mt-3">
+                        ★★★★☆
+                    </div>
+                    <p class="mt-3 text-gray-700">"Best Reasoning preparation platform. The shortcuts and puzzle tricks are game-changers."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FAQ SECTION ========== -->
+    <section class="py-16 bg-gray-50/50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold font-poppins text-gray-800">
+                    Frequently <span class="gradient-text">Asked Questions</span>
+                </h2>
+            </div>
+
+            <div class="space-y-4" id="faq-container">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="faq-question px-6 py-4 flex items-center justify-between" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-800">What topics are covered in the Reasoning course?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-4 text-gray-600">
+                        Our Reasoning course covers all major topics including Puzzles, Seating Arrangement, Syllogism, Inequality, Coding-Decoding, Input-Output, Blood Relation, Direction & Distance, Order & Ranking, Alphanumeric Series, Number Series, Alphabet Series, Machine Input-Output, Logical Reasoning, Data Sufficiency, Critical Reasoning, Analytical Reasoning, Decision Making, and more.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="faq-question px-6 py-4 flex items-center justify-between" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-800">How many practice questions are available for reasoning?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-4 text-gray-600">
+                        We have over 8,000 practice questions across all reasoning topics, with varying difficulty levels. Each question comes with detailed solutions and shortcuts.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="faq-question px-6 py-4 flex items-center justify-between" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-800">Is there a mock test series available for reasoning?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-4 text-gray-600">
+                        Yes, we offer 400+ mock tests including full-length tests, sectional tests, and topic-wise tests with AI analysis and rank prediction.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="faq-question px-6 py-4 flex items-center justify-between" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-800">Do you provide study material and PDFs for reasoning?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-4 text-gray-600">
+                        Absolutely! We provide comprehensive study material, puzzle shortcuts, formula sheets, one-page notes, and daily PDFs for practice.
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="faq-question px-6 py-4 flex items-center justify-between" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-800">Can I access the content offline?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-4 text-gray-600">
+                        Yes, our mobile app allows offline access to downloaded lectures and materials. You can study anytime, anywhere.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== NEWSLETTER ========== -->
+    <section class="py-16 bg-gradient-to-r from-blue-600 to-sky-400 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold font-poppins">
+                Get Daily <span class="text-white/90">Study Material</span>
+            </h2>
+            <p class="mt-4 text-blue-50 text-lg">
+                Subscribe for daily PDFs, mock tests, vocabulary, current affairs & more
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" />
+                <button class="px-8 py-3 bg-white text-blue-600 rounded-xl font-semibold hover:shadow-xl transition-all hover:scale-105">
+                    Subscribe
+                </button>
+            </div>
+            <p class="mt-4 text-sm text-blue-100">Join 100,000+ students. No spam, unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-2xl font-bold font-poppins text-white">Learnovu</h4>
+                    <p class="text-sm mt-2">Learn Smart. Crack Faster.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="hover:text-white transition-colors"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="hover:text-white transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="hover:text-white transition-colors"><i class="fab fa-youtube text-xl"></i></a>
+                        <a href="#" class="hover:text-white transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="hover:text-white transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold mb-3">Quick Links</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold mb-3">Exams</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">SSC</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Banking</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Railway</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">CAT</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold mb-3">Support</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+                © 2026 Learnovu. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('mobile-menu');
+
+            if (toggle && menu) {
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    menu.classList.toggle('open');
+                    toggle.textContent = menu.classList.contains('open') ? '✕' : '☰';
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!menu.contains(e.target) && e.target !== toggle) {
+                        menu.classList.remove('open');
+                        toggle.textContent = '☰';
+                    }
+                });
+            }
+
+            // FAQ Toggle
+            window.toggleFAQ = function(element) {
+                const answer = element.nextElementSibling;
+                const icon = element.querySelector('.faq-icon');
+
+                if (answer.classList.contains('open')) {
+                    answer.classList.remove('open');
+                    icon.classList.remove('open');
+                } else {
+                    document.querySelectorAll('.faq-answer').forEach(el => el.classList.remove('open'));
+                    document.querySelectorAll('.faq-icon').forEach(el => el.classList.remove('open'));
+
+                    answer.classList.add('open');
+                    icon.classList.add('open');
+                }
+            };
+
+            // Scroll Reveal
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // Floating icon animation
+            document.querySelectorAll('.floating-icon').forEach((el, index) => {
+                el.style.animationDelay = (index * 0.5) + 's';
+            });
+        });
+    </script>
+
+</body>
+</html>

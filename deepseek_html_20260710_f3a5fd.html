@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learnovu – Train Based Problems Chapter</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <style>
+        /* ===== BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8faff;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ===== GLASSMORPHISM ===== */
+        .glass {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #2563EB, #38BDF8);
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        /* ===== LECTURE CARD ===== */
+        .lecture-card {
+            transition: all 0.3s ease;
+            background: white;
+            border-radius: 1.25rem;
+            box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+        .lecture-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px -12px rgba(37, 99, 235, 0.12);
+            border-color: rgba(37, 99, 235, 0.08);
+        }
+
+        .lecture-thumb {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .lecture-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .lecture-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+        .lecture-thumb-overlay:hover {
+            background: rgba(0, 0, 0, 0.15);
+        }
+        .play-btn-circle {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+        .play-btn-circle:hover {
+            transform: scale(1.1);
+        }
+        .play-btn-circle i {
+            font-size: 28px;
+            color: white;
+            margin-left: 4px;
+        }
+        .lecture-thumb-label {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            z-index: 2;
+        }
+        .lecture-thumb-badge {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 0.2rem 0.7rem;
+            border-radius: 9999px;
+            z-index: 2;
+        }
+        .badge-watched {
+            background: #22c55e;
+            color: white;
+        }
+
+        /* ===== DIFFICULTY BADGES ===== */
+        .badge-beginner {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+        .badge-intermediate {
+            background: #fef9c3;
+            color: #ca8a04;
+        }
+        .badge-advanced {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+        .badge-free {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+        .badge-premium {
+            background: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        /* ===== PROGRESS BAR ===== */
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #2563EB, #38BDF8);
+            border-radius: 9999px;
+            transition: width 0.5s ease;
+        }
+
+        /* ===== VIDEO MODAL ===== */
+        #videoModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        #videoModal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #1a1a2e;
+            border-radius: 1.5rem;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+        }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background: #16213e;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .modal-header h3 {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .modal-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+        .modal-close:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: #0a0a1a;
+        }
+        .video-wrapper iframe,
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav-link {
+            font-weight: 500;
+            color: #1e293b;
+            transition: color 0.2s;
+        }
+        .nav-link:hover {
+            color: #2563EB;
+        }
+
+        /* ===== MOBILE MENU ===== */
+        #mobile-menu {
+            display: none;
+        }
+        #mobile-menu.open {
+            display: block;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+        .faq-answer.open {
+            max-height: 300px;
+            opacity: 1;
+        }
+        .faq-question {
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .faq-question:hover {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-icon.open {
+            transform: rotate(180deg);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2563EB;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVIGATION ========== -->
+    <header class="sticky top-0 z-50 glass border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-bold font-poppins text-[#2563EB]">Learnovu</span>
+                    <span class="hidden md:inline text-xs font-medium bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full">Chapter</span>
+                </div>
+                <nav class="hidden lg:flex items-center space-x-1 text-sm">
+                    <a href="#" class="nav-link px-3 py-2">Home</a>
+                    <a href="#" class="nav-link px-3 py-2">Courses</a>
+                    <a href="#" class="nav-link px-3 py-2">Mock Tests</a>
+                    <a href="#" class="nav-link px-3 py-2">Practice</a>
+                    <a href="#" class="nav-link px-3 py-2">Formula Hub</a>
+                </nav>
+                <div class="flex items-center space-x-3">
+                    <button id="dark-toggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-moon text-gray-600"></i>
+                    </button>
+                    <a href="#" class="hidden md:inline-block text-sm font-medium text-gray-700 hover:text-blue-600">Login</a>
+                    <a href="#" class="btn-primary text-sm px-4 py-2 rounded-full font-medium">Register</a>
+                    <button id="menu-toggle" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 text-2xl leading-none">☰</button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="lg:hidden bg-white/90 backdrop-blur-md border-t border-gray-200/50 py-4 px-2">
+                <div class="flex flex-col space-y-2 text-sm font-medium">
+                    <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Home</a>
+                    <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Courses</a>
+                    <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Mock Tests</a>
+                    <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Practice</a>
+                    <a href="#" class="px-3 py-2 hover:bg-blue-50 rounded-lg">Formula Hub</a>
+                    <hr class="my-2" />
+                    <a href="#" class="px-3 py-2 text-blue-600 font-semibold">Login</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========== VIDEO MODAL ========== -->
+    <div id="videoModal" class="video-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="videoTitle">Lecture Title</h3>
+                <button class="modal-close" onclick="closeVideo()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="video-wrapper">
+                <iframe id="videoFrame" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <main class="pt-20 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+
+        <!-- Breadcrumb -->
+        <div class="flex items-center space-x-2 text-sm text-gray-500 mb-6">
+            <a href="#" class="hover:text-blue-600 transition-colors">Home</a>
+            <i class="fas fa-chevron-right text-xs"></i>
+            <a href="#" class="hover:text-blue-600 transition-colors">Quantitative Aptitude</a>
+            <i class="fas fa-chevron-right text-xs"></i>
+            <span class="text-gray-700 font-medium">Train Based Problems</span>
+        </div>
+
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-start justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold font-poppins text-gray-800">
+                        🚂 Train Based Problems
+                    </h1>
+                    <p class="text-gray-600 mt-2 max-w-2xl">
+                        Master train-based problems including speed, distance, crossing platforms, and relative speed concepts with structured video lectures.
+                    </p>
+                </div>
+                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                    <span>7 Lectures</span>
+                    <span>⏱️ 3h 45m</span>
+                </div>
+            </div>
+            <div class="mt-4 max-w-md">
+                <div class="flex justify-between text-sm mb-1">
+                    <span class="text-gray-600">Progress</span>
+                    <span class="font-medium text-gray-700">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Continue Watching -->
+        <div class="mb-8 bg-gradient-to-br from-blue-50 to-sky-50 rounded-2xl p-6 border border-blue-100/50">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div class="flex items-start space-x-4">
+                    <div class="w-20 h-14 bg-gradient-to-br from-blue-500 to-sky-400 rounded-xl flex items-center justify-center text-white text-2xl flex-shrink-0">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Continue Watching</p>
+                        <h4 class="font-semibold text-gray-800">Lecture 1: Introduction to Train Problems</h4>
+                        <div class="flex items-center space-x-4 mt-1 text-sm text-gray-500">
+                            <span>⏱️ Remaining: 22:15</span>
+                            <span>📊 0%</span>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="openVideo('5BvZZJvF5go', 'Lecture 1: Introduction to Train Problems')" class="bg-gradient-to-r from-blue-600 to-sky-400 text-white px-6 py-2 rounded-xl font-medium hover:shadow-lg transition-all hover:scale-105 flex items-center space-x-2">
+                    <i class="fas fa-play"></i>
+                    <span>Resume</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Course Progress -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white rounded-2xl p-4 shadow-lg border border-gray-100/50">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 rounded-xl bg-blue-50 text-blue-600">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Total Lectures</p>
+                        <p class="text-lg font-bold text-gray-800">7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-4 shadow-lg border border-gray-100/50">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 rounded-xl bg-green-50 text-green-600">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Completed</p>
+                        <p class="text-lg font-bold text-gray-800">0</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-4 shadow-lg border border-gray-100/50">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 rounded-xl bg-orange-50 text-orange-600">
+                        <i class="fas fa-circle-dashed"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Remaining</p>
+                        <p class="text-lg font-bold text-gray-800">7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-2xl p-4 shadow-lg border border-gray-100/50">
+                <div class="flex items-center space-x-3">
+                    <div class="p-2 rounded-xl bg-purple-50 text-purple-600">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500">Total Duration</p>
+                        <p class="text-lg font-bold text-gray-800">3h 45m</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="mb-8 flex flex-col sm:flex-row gap-4">
+            <div class="flex-1 relative">
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input id="searchInput" type="text" placeholder="Search lectures..." class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+            <div class="flex gap-3">
+                <select id="difficultyFilter" class="px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="All">All Difficulty</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+                <select id="sortBy" class="px-4 py-3 rounded-xl border border-gray-200 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="number">Lecture Number</option>
+                    <option value="duration">Duration</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Lecture List -->
+        <div class="space-y-4 mb-12">
+            <h2 class="text-2xl font-bold font-poppins text-gray-800">Lectures (<span id="lectureCount">7</span>)</h2>
+            <div id="lectureList"></div>
+        </div>
+
+        <!-- Chapter Resources -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold font-poppins text-gray-800 mb-4">Chapter Resources</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100/50 hover:border-blue-200 group">
+                    <div class="p-3 rounded-xl bg-blue-50 text-blue-600 w-fit group-hover:scale-110 transition-transform">
+                        <i class="fas fa-file-alt text-xl"></i>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mt-3">Notes PDF</h4>
+                    <p class="text-xs text-gray-500 mt-1">Complete chapter notes for quick revision.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100/50 hover:border-blue-200 group">
+                    <div class="p-3 rounded-xl bg-green-50 text-green-600 w-fit group-hover:scale-110 transition-transform">
+                        <i class="fas fa-file-alt text-xl"></i>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mt-3">Formula Sheet</h4>
+                    <p class="text-xs text-gray-500 mt-1">All important formulas and shortcuts.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100/50 hover:border-blue-200 group">
+                    <div class="p-3 rounded-xl bg-yellow-50 text-yellow-600 w-fit group-hover:scale-110 transition-transform">
+                        <i class="fas fa-bolt text-xl"></i>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mt-3">Short Tricks</h4>
+                    <p class="text-xs text-gray-500 mt-1">Time-saving tricks for solving problems.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100/50 hover:border-blue-200 group">
+                    <div class="p-3 rounded-xl bg-purple-50 text-purple-600 w-fit group-hover:scale-110 transition-transform">
+                        <i class="fas fa-file-alt text-xl"></i>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mt-3">Important Questions</h4>
+                    <p class="text-xs text-gray-500 mt-1">Must-practice questions for exams.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Zone -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold font-poppins text-gray-800 mb-4">Practice Zone</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div class="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100/50 hover:border-blue-200 group">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 rounded-xl bg-blue-50 text-blue-600 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-file-alt text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Practice Questions</h4>
+                            <p class="text-xs text-gray-500">150+ practice questions with solutions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100/50 hover:border-blue-200 group">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 rounded-xl bg-purple-50 text-purple-600 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-bullseye text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Topic Test</h4>
+                            <p class="text-xs text-gray-500">Topic-wise test to assess understanding.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100/50 hover:border-blue-200 group">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 rounded-xl bg-orange-50 text-orange-600 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-bullseye text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Chapter Test</h4>
+                            <p class="text-xs text-gray-500">Complete chapter test with 40 questions.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100/50 hover:border-blue-200 group">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 rounded-xl bg-yellow-50 text-yellow-600 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-bolt text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Daily Quiz</h4>
+                            <p class="text-xs text-gray-500">Daily 10-question quiz to stay sharp.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all cursor-pointer border border-gray-100/50 hover:border-blue-200 group">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 rounded-xl bg-green-50 text-green-600 group-hover:scale-110 transition-transform">
+                            <i class="fas fa-file-alt text-lg"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Previous Year Questions</h4>
+                            <p class="text-xs text-gray-500">All PYQs from competitive exams.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Assistant -->
+        <div class="mb-12 bg-gradient-to-br from-blue-50 to-sky-50 rounded-2xl p-6 border border-blue-100/50">
+            <div class="flex items-center space-x-2 mb-4">
+                <i class="fas fa-sparkles text-blue-600"></i>
+                <h3 class="text-lg font-bold text-gray-800">AI Study Assistant</h3>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center hover:shadow-lg transition-all cursor-pointer border border-white/30 hover:border-blue-200">
+                    <div class="p-2 rounded-xl bg-blue-100 text-blue-600 w-fit mx-auto">
+                        <i class="fas fa-comment-dots text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 mt-2">AI Doubt Solver</p>
+                    <p class="text-xs text-gray-500">Get instant answers</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center hover:shadow-lg transition-all cursor-pointer border border-white/30 hover:border-blue-200">
+                    <div class="p-2 rounded-xl bg-purple-100 text-purple-600 w-fit mx-auto">
+                        <i class="fas fa-sparkles text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 mt-2">AI Summary Generator</p>
+                    <p class="text-xs text-gray-500">Quick chapter summary</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center hover:shadow-lg transition-all cursor-pointer border border-white/30 hover:border-blue-200">
+                    <div class="p-2 rounded-xl bg-green-100 text-green-600 w-fit mx-auto">
+                        <i class="fas fa-bullseye text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 mt-2">AI Quiz Generator</p>
+                    <p class="text-xs text-gray-500">Custom quizzes</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center hover:shadow-lg transition-all cursor-pointer border border-white/30 hover:border-blue-200">
+                    <div class="p-2 rounded-xl bg-orange-100 text-orange-600 w-fit mx-auto">
+                        <i class="fas fa-calendar text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 mt-2">AI Revision Planner</p>
+                    <p class="text-xs text-gray-500">Smart revision</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-4 text-center hover:shadow-lg transition-all cursor-pointer border border-white/30 hover:border-blue-200">
+                    <div class="p-2 rounded-xl bg-pink-100 text-pink-600 w-fit mx-auto">
+                        <i class="fas fa-clock text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 mt-2">AI Study Schedule</p>
+                    <p class="text-xs text-gray-500">Personalized schedule</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructor & Recommended -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+            <div class="lg:col-span-2">
+                <h2 class="text-2xl font-bold font-poppins text-gray-800 mb-4">Recommended Chapters</h2>
+                <div class="flex flex-wrap gap-3">
+                    <a href="#" class="bg-white px-4 py-3 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100/50 hover:border-blue-200 flex items-center space-x-2 group">
+                        <i class="fas fa-ship text-blue-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-gray-700">Boat & Stream</span>
+                        <i class="fas fa-chevron-right text-gray-400 group-hover:text-blue-600 transition-colors"></i>
+                    </a>
+                    <a href="#" class="bg-white px-4 py-3 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100/50 hover:border-blue-200 flex items-center space-x-2 group">
+                        <i class="fas fa-clock text-blue-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-gray-700">Time, Speed & Distance</span>
+                        <i class="fas fa-chevron-right text-gray-400 group-hover:text-blue-600 transition-colors"></i>
+                    </a>
+                    <a href="#" class="bg-white px-4 py-3 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100/50 hover:border-blue-200 flex items-center space-x-2 group">
+                        <i class="fas fa-percent text-blue-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-gray-700">Percentage</span>
+                        <i class="fas fa-chevron-right text-gray-400 group-hover:text-blue-600 transition-colors"></i>
+                    </a>
+                    <a href="#" class="bg-white px-4 py-3 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100/50 hover:border-blue-200 flex items-center space-x-2 group">
+                        <i class="fas fa-chart-line text-blue-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-gray-700">Profit & Loss</span>
+                        <i class="fas fa-chevron-right text-gray-400 group-hover:text-blue-600 transition-colors"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold font-poppins text-gray-800 mb-4">Instructor</h2>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100/50">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-sky-400 flex items-center justify-center text-white text-xl font-bold flex-shrink-0">
+                            PS
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-bold text-gray-800">Pratikarsh Sir</h4>
+                            <p class="text-sm text-gray-500">8+ years of teaching</p>
+                            <div class="flex flex-wrap items-center gap-3 mt-2 text-sm text-gray-600">
+                                <span class="flex items-center gap-1"><i class="fas fa-users"></i> 32,000 students</span>
+                                <span class="flex items-center gap-1"><i class="fas fa-book-open"></i> 6 courses</span>
+                                <span class="flex items-center gap-1"><i class="fas fa-star text-yellow-400"></i> 4.9</span>
+                            </div>
+                        </div>
+                        <button class="bg-gradient-to-r from-blue-600 to-sky-400 text-white px-5 py-2 rounded-xl text-sm font-medium hover:shadow-lg transition-all hover:scale-105">
+                            Message
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold font-poppins text-gray-800 mb-4">Frequently Asked Questions</h2>
+            <div class="space-y-3">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100/50">
+                    <div class="faq-question px-6 py-4 flex items-center justify-between" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-800">What are the basic formulas for train problems?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-4 text-gray-600">
+                        The basic formulas are: Speed = Distance / Time, Distance = Speed × Time, Time = Distance / Speed. For trains crossing a pole, Distance = Length of train. For crossing a platform, Distance = Length of train + Length of platform.
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100/50">
+                    <div class="faq-question px-6 py-4 flex items-center justify-between" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-800">What is relative speed in train problems?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-4 text-gray-600">
+                        Relative speed is the speed of one object with respect to another. For trains moving in opposite directions, relative speed = Sum of speeds. For trains moving in the same direction, relative speed = Difference of speeds.
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100/50">
+                    <div class="faq-question px-6 py-4 flex items-center justify-between" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-800">How to solve train crossing a platform problems?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-4 text-gray-600">
+                        When a train crosses a platform, the total distance covered = Length of train + Length of platform. Use the formula: Time = (Length of train + Length of platform) / Speed of train.
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100/50">
+                    <div class="faq-question px-6 py-4 flex items-center justify-between" onclick="toggleFAQ(this)">
+                        <span class="font-semibold text-gray-800">How many questions on train problems appear in exams?</span>
+                        <i class="fas fa-chevron-down text-gray-400 faq-icon"></i>
+                    </div>
+                    <div class="faq-answer px-6 pb-4 text-gray-600">
+                        In most competitive exams like SSC, Banking, and Railway, you can expect 2-4 questions on train-based problems. These are high-scoring if practiced well.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="mb-8 bg-gradient-to-r from-blue-600 to-sky-400 text-white rounded-2xl p-8 text-center">
+            <h3 class="text-2xl font-bold font-poppins">Get Daily Study Material</h3>
+            <p class="mt-2 text-blue-50">Subscribe for daily PDFs, mock tests, vocabulary & more</p>
+            <div class="mt-6 flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-5 py-3 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" />
+                <button class="px-6 py-3 bg-white text-blue-600 rounded-xl font-semibold hover:shadow-xl transition-all hover:scale-105">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-2xl font-bold font-poppins text-white">Learnovu</h4>
+                    <p class="text-sm mt-2">Learn Smart. Crack Faster.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="hover:text-white transition-colors"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="hover:text-white transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="hover:text-white transition-colors"><i class="fab fa-youtube text-xl"></i></a>
+                        <a href="#" class="hover:text-white transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="hover:text-white transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold mb-3">Quick Links</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold mb-3">Exams</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">SSC</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Banking</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Railway</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">CAT</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-semibold mb-3">Support</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+                © 2026 Learnovu. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script>
+        // ============================
+        // LECTURE DATA - 7 Train Based Videos
+        // ============================
+        // Video IDs from the playlist:
+        // You need to replace these with the actual 11-character IDs from your playlist
+        // Example: "dQw4w9WgXcQ" is a placeholder
+        // The actual playlist ID format is: https://youtube.com/playlist?list=PLR8A-AOm-IwDLwnikX6qz-d-NtvarEGNT
+        
+        // For now, I'm using the playlist ID format with sequential numbers
+        // You need to replace each videoId with the actual YouTube video ID from your playlist
+        const lectureData = [{
+            id: 1,
+            title: "Introduction to Train Problems",
+            description: "Basic concepts of train problems including speed, distance, and time relationships. Learn the fundamental approach to solve train-based questions.",
+            // Replace with your actual video ID from the playlist
+            videoId: "https://youtu.be/u0LW-Qo_Dkc?si=WLm9wCsVxfOQC37C",
+            thumbnail: "",
+            duration: "1:00",
+            difficulty: "Beginner",
+            isFree: true,
+            isWatched: false,
+            hasNotes: true,
+            hasPdf: true,
+            practiceQuestions: 15,
+            hasQuiz: true,
+            instructor: "Pratikarsh Sir",
+            lastUpdated: "1 week ago",
+            gradient: "from-blue-400 to-blue-600"
+        }, {
+            id: 2,
+            title: "Train Crossing a Pole",
+            description: "Learn how to solve problems when a train crosses a stationary pole or man. Master the concept of distance = length of train.",
+            videoId: "5BvZZJvF5go",
+            thumbnail: "https://img.youtube.com/vi/5BvZZJvF5go/mqdefault.jpg",
+            duration: "32:20",
+            difficulty: "Beginner",
+            isFree: true,
+            isWatched: false,
+            hasNotes: true,
+            hasPdf: true,
+            practiceQuestions: 18,
+            hasQuiz: true,
+            instructor: "Pratikarsh Sir",
+            lastUpdated: "1 week ago",
+            gradient: "from-green-400 to-green-600"
+        }, {
+            id: 3,
+            title: "Train Crossing a Platform",
+            description: "Detailed explanation of train crossing platform problems. Understand the formula: Distance = Train Length + Platform Length.",
+            videoId: "5BvZZJvF5go",
+            thumbnail: "https://img.youtube.com/vi/5BvZZJvF5go/mqdefault.jpg",
+            duration: "35:10",
+            difficulty: "Intermediate",
+            isFree: true,
+            isWatched: false,
+            hasNotes: true,
+            hasPdf: true,
+            practiceQuestions: 20,
+            hasQuiz: true,
+            instructor: "Pratikarsh Sir",
+            lastUpdated: "6 days ago",
+            gradient: "from-purple-400 to-purple-600"
+        }, {
+            id: 4,
+            title: "Train Crossing a Bridge",
+            description: "Solve problems where a train crosses a bridge or tunnel. Learn the formula variations and important tricks.",
+            videoId: "5BvZZJvF5go",
+            thumbnail: "https://img.youtube.com/vi/5BvZZJvF5go/mqdefault.jpg",
+            duration: "30:15",
+            difficulty: "Intermediate",
+            isFree: false,
+            isWatched: false,
+            hasNotes: true,
+            hasPdf: true,
+            practiceQuestions: 22,
+            hasQuiz: true,
+            instructor: "Pratikarsh Sir",
+            lastUpdated: "6 days ago",
+            gradient: "from-pink-400 to-pink-600"
+        }, {
+            id: 5,
+            title: "Relative Speed - Opposite Direction",
+            description: "Master problems where two trains move in opposite directions. Learn relative speed = sum of speeds and related concepts.",
+            videoId: "5BvZZJvF5go",
+            thumbnail: "https://img.youtube.com/vi/5BvZZJvF5go/mqdefault.jpg",
+            duration: "38:40",
+            difficulty: "Advanced",
+            isFree: false,
+            isWatched: false,
+            hasNotes: true,
+            hasPdf: true,
+            practiceQuestions: 25,
+            hasQuiz: true,
+            instructor: "Pratikarsh Sir",
+            lastUpdated: "5 days ago",
+            gradient: "from-orange-400 to-orange-600"
+        }, {
+            id: 6,
+            title: "Relative Speed - Same Direction",
+            description: "Learn to solve problems when trains move in the same direction. Understand relative speed = difference of speeds.",
+            videoId: "5BvZZJvF5go",
+            thumbnail: "https://img.youtube.com/vi/5BvZZJvF5go/mqdefault.jpg",
+            duration: "35:50",
+            difficulty: "Advanced",
+            isFree: false,
+            isWatched: false,
+            hasNotes: true,
+            hasPdf: true,
+            practiceQuestions: 28,
+            hasQuiz: true,
+            instructor: "Pratikarsh Sir",
+            lastUpdated: "4 days ago",
+            gradient: "from-red-400 to-red-600"
+        }, {
+            id: 7,
+            title: "Mixed Problems & Previous Year Questions",
+            description: "Comprehensive practice of all types of train problems. Solve previous year questions and learn advanced shortcuts.",
+            videoId: "5BvZZJvF5go",
+            thumbnail: "https://img.youtube.com/vi/5BvZZJvF5go/mqdefault.jpg",
+            duration: "42:20",
+            difficulty: "Advanced",
+            isFree: false,
+            isWatched: false,
+            hasNotes: true,
+            hasPdf: true,
+            practiceQuestions: 35,
+            hasQuiz: true,
+            instructor: "Pratikarsh Sir",
+            lastUpdated: "3 days ago",
+            gradient: "from-indigo-400 to-indigo-600"
+        }];
+
+        // ============================
+        // VIDEO FUNCTIONS
+        // ============================
+        function openVideo(videoIdOrUrl, title) {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('videoFrame');
+            const titleEl = document.getElementById('videoTitle');
+
+            // Check if it's a YouTube video ID (11 characters)
+            const isYouTube = videoIdOrUrl.length === 11 && !videoIdOrUrl.includes('http');
+            const isVimeo = /^\d+$/.test(videoIdOrUrl) && videoIdOrUrl.length >= 6;
+
+            if (isYouTube) {
+                frame.src = `https://www.youtube.com/embed/${videoIdOrUrl}?autoplay=1&rel=0`;
+            } else if (isVimeo) {
+                frame.src = `https://player.vimeo.com/video/${videoIdOrUrl}?autoplay=1`;
+            } else if (videoIdOrUrl.includes('http')) {
+                const wrapper = frame.parentElement;
+                const videoHtml = `
+                    <video controls autoplay class="w-full h-full absolute top-0 left-0">
+                        <source src="${videoIdOrUrl}" type="video/mp4">
+                        <source src="${videoIdOrUrl}" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+                wrapper.innerHTML = videoHtml;
+                titleEl.textContent = title || 'Lecture';
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                return;
+            } else {
+                frame.src = `https://www.youtube.com/embed/${videoIdOrUrl}?autoplay=1&rel=0`;
+            }
+
+            titleEl.textContent = title || 'Lecture';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('videoFrame');
+            const wrapper = frame.parentElement;
+
+            frame.src = '';
+            const videoEl = wrapper.querySelector('video');
+            if (videoEl) {
+                videoEl.remove();
+            }
+            if (!wrapper.querySelector('iframe')) {
+                wrapper.innerHTML =
+                    '<iframe id="videoFrame" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media" class="w-full h-full absolute top-0 left-0"></iframe>';
+            }
+
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideo();
+            }
+        });
+
+        // Close modal on outside click
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideo();
+            }
+        });
+
+        // ============================
+        // RENDER LECTURES
+        // ============================
+        function renderLectures() {
+            const container = document.getElementById('lectureList');
+            const searchInput = document.getElementById('searchInput');
+            const difficultyFilter = document.getElementById('difficultyFilter');
+            const sortBy = document.getElementById('sortBy');
+
+            function getFilteredLectures() {
+                const search = searchInput.value.toLowerCase();
+                const difficulty = difficultyFilter.value;
+
+                let filtered = lectureData.filter(lecture => {
+                    const matchesSearch = lecture.title.toLowerCase().includes(search) ||
+                        lecture.description.toLowerCase().includes(search);
+                    const matchesDifficulty = difficulty === 'All' || lecture.difficulty === difficulty;
+                    return matchesSearch && matchesDifficulty;
+                });
+
+                if (sortBy.value === 'number') {
+                    filtered.sort((a, b) => a.id - b.id);
+                } else if (sortBy.value === 'duration') {
+                    filtered.sort((a, b) => a.duration.localeCompare(b.duration));
+                }
+
+                return filtered;
+            }
+
+            function render() {
+                const filtered = getFilteredLectures();
+                document.getElementById('lectureCount').textContent = filtered.length;
+
+                container.innerHTML = filtered.map(lecture => `
+                    <div class="lecture-card">
+                        <div class="flex flex-col md:flex-row">
+                            <div class="bg-gradient-to-br ${lecture.gradient} w-full md:w-56 h-48 md:h-auto flex-shrink-0 flex items-center justify-center text-white text-5xl relative">
+                                <span class="lecture-thumb-label">Lecture ${lecture.id}</span>
+                                <img src="${lecture.thumbnail}" alt="${lecture.title}" class="w-full h-full object-cover" onerror="this.style.display='none'" />
+                                <div class="lecture-thumb-overlay" onclick="openVideo('${lecture.videoId}', '${lecture.title}')">
+                                    <div class="play-btn-circle">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                </div>
+                                ${lecture.isWatched ? '<span class="lecture-thumb-badge badge-watched">✅ Watched</span>' : ''}
+                            </div>
+                            <div class="flex-1 p-5">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1">
+                                        <h3 class="text-lg font-bold text-gray-800 hover:text-blue-600 transition-colors">${lecture.title}</h3>
+                                        <p class="text-sm text-gray-500 mt-1">${lecture.description}</p>
+                                    </div>
+                                    <button class="p-2 rounded-lg hover:bg-gray-100 transition-colors ml-4 bookmark-btn" data-id="${lecture.id}">
+                                        <i class="far fa-bookmark text-gray-400"></i>
+                                    </button>
+                                </div>
+                                <div class="flex flex-wrap items-center gap-3 mt-3">
+                                    <span class="badge-${lecture.difficulty.toLowerCase()} text-xs font-semibold px-3 py-1 rounded-full">${lecture.difficulty}</span>
+                                    <span class="badge-${lecture.isFree ? 'free' : 'premium'} text-xs font-semibold px-3 py-1 rounded-full">${lecture.isFree ? 'Free' : 'Premium'}</span>
+                                    <span class="text-xs text-gray-500 flex items-center gap-1"><i class="fas fa-clock"></i> ${lecture.duration}</span>
+                                    <span class="text-xs text-gray-500 flex items-center gap-1"><i class="fas fa-user"></i> ${lecture.instructor}</span>
+                                    <span class="text-xs text-gray-400">Updated ${lecture.lastUpdated}</span>
+                                </div>
+                                <div class="flex flex-wrap items-center gap-3 mt-3 text-xs text-gray-500">
+                                    ${lecture.hasNotes ? '<span class="flex items-center gap-1"><i class="fas fa-file-alt"></i> Notes</span>' : ''}
+                                    ${lecture.hasPdf ? '<span class="flex items-center gap-1"><i class="fas fa-download"></i> PDF</span>' : ''}
+                                    ${lecture.practiceQuestions > 0 ? `<span class="flex items-center gap-1"><i class="fas fa-bullseye"></i> ${lecture.practiceQuestions} Qs</span>` : ''}
+                                    ${lecture.hasQuiz ? '<span class="flex items-center gap-1"><i class="fas fa-bolt"></i> Quiz</span>' : ''}
+                                </div>
+                                <div class="flex items-center gap-3 mt-4">
+                                    <button onclick="openVideo('${lecture.videoId}', '${lecture.title}')" class="bg-gradient-to-r from-blue-600 to-sky-400 text-white px-5 py-2 rounded-xl text-sm font-medium hover:shadow-lg transition-all hover:scale-105 flex items-center gap-2">
+                                        <i class="fas fa-play"></i> Watch
+                                    </button>
+                                    <button class="border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-50 transition-all flex items-center gap-2">
+                                        <i class="fas fa-download"></i> Notes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Bookmark functionality
+                document.querySelectorAll('.bookmark-btn').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const icon = this.querySelector('i');
+                        if (icon.classList.contains('far')) {
+                            icon.classList.remove('far');
+                            icon.classList.add('fas');
+                            icon.classList.add('text-blue-600');
+                            icon.classList.remove('text-gray-400');
+                        } else {
+                            icon.classList.remove('fas');
+                            icon.classList.add('far');
+                            icon.classList.remove('text-blue-600');
+                            icon.classList.add('text-gray-400');
+                        }
+                    });
+                });
+            }
+
+            searchInput.addEventListener('input', render);
+            difficultyFilter.addEventListener('change', render);
+            sortBy.addEventListener('change', render);
+
+            render();
+        }
+
+        // ============================
+        // INITIALIZATION
+        // ============================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu
+            const toggle = document.getElementById('menu-toggle');
+            const menu = document.getElementById('mobile-menu');
+
+            if (toggle && menu) {
+                toggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    menu.classList.toggle('open');
+                    toggle.textContent = menu.classList.contains('open') ? '✕' : '☰';
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (!menu.contains(e.target) && e.target !== toggle) {
+                        menu.classList.remove('open');
+                        toggle.textContent = '☰';
+                    }
+                });
+            }
+
+            // Dark Mode
+            const darkToggle = document.getElementById('dark-toggle');
+            let isDark = false;
+
+            if (darkToggle) {
+                darkToggle.addEventListener('click', function() {
+                    isDark = !isDark;
+                    document.documentElement.classList.toggle('dark');
+                    darkToggle.innerHTML = isDark ?
+                        '<i class="fas fa-sun text-yellow-400"></i>' :
+                        '<i class="fas fa-moon text-gray-600"></i>';
+                });
+            }
+
+            // FAQ Toggle
+            window.toggleFAQ = function(element) {
+                const answer = element.nextElementSibling;
+                const icon = element.querySelector('.faq-icon');
+
+                if (answer.classList.contains('open')) {
+                    answer.classList.remove('open');
+                    icon.classList.remove('open');
+                } else {
+                    document.querySelectorAll('.faq-answer').forEach(el => el.classList.remove('open'));
+                    document.querySelectorAll('.faq-icon').forEach(el => el.classList.remove('open'));
+
+                    answer.classList.add('open');
+                    icon.classList.add('open');
+                }
+            };
+
+            // Initialize lectures
+            renderLectures();
+        });
+    </script>
+
+</body>
+</html>
